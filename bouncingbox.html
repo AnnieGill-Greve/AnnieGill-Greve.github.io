@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        div {
+            background-color: red;
+            position: absolute;
+            height: 50px;
+            width: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">dead people</div>
+</body>
+
+</html>
+
+<script>
+    var box = document.getElementById("box")
+    document.getElementById("box").addEventListener("click",boxClick)
+    var x = 0
+    var y = 0
+    var speedx = -10
+    var speedy = 1
+    setInterval(update, 50)
+
+    function update() {
+        box.style.left = x + "px"
+        box.style.top = y + "px"
+        x = x + speedx
+        y = y + speedy
+        if (x > 300) {
+            speedx = -speedx
+        }
+        if (x < 0) {
+            speedx = speedx * -1
+        }
+        if (y > 350) {
+            speedy = -speedy
+        }
+        if ( y < 0) {
+            speedy = speedy * -1
+        }
+
+
+    }
+
+    function boxClick() {
+    speedx = speedx+5
+
+    }
+</script>
