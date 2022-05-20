@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+  <canvas id="canvas" width="1400" height="1000"></canvas>
+</body>
+
+</html>
+<script>
+  document.addEventListener("mousemove", mouse)
+  document.addEventListener("click", restart)
+  var canvas = document.getElementById("canvas")
+  var ctx = canvas.getContext("2d")
+  var x = []
+  var y = []
+  var radius = []
+  var speedx = []
+  var speedy = []
+  var color = []
+  var mousex = -10000
+  var mousey = -10000
+  var mouseRadius = 10
+  var score = 0
+  var alive = false
+  restart()
+  setInterval(move, 70)
+  function mouse() {
+    mousex = event.clientX
+    mousey = event.clientY
+  }
+  function move() {
+    ctx.clearRect(0, 0, 6000, 6000)
+    ctx.beginPath()
+    ctx.fillStyle = "purple"
+    ctx.arc(mousex, mousey, mouseRadius, 0, 2 * Math.PI)
+    ctx.fill()
+    for (var i = 0; i < 1000; i = i + 1) {
+      ctx.beginPath()
+      ctx.fillStyle = color[i]
+      ctx.arc(x[i], y[i], radius[i], 0, 2 * Math.PI)
+      ctx.fill()
+      x[i] = x[i] + speedx[i]
+      y[i] = y[i] + speedy[i]
+      a = mousey - y[i]
+      b = mousex - x[i]
+      distance = Math.sqrt(a * a + b * b)
+      if (distance < mouseRadius + radius[i]) {
+        ctx.fillRect(mousex, mousey, 20, 22)
+        if (radius[i] > mouseRadius) {//die
+          alive = false
+        }
+        if (mouseRadius > radius[i]) {//get bigger
+          mouseRadius = mouseRadius + 1
+          radius.splice(i, 1)
+          color.splice(i, 1)
+          speedx.splice(i, 1)
+          speedy.splice(i, 1)
+          x.splice(i, 1)
+          y.splice(i, 1)
+          score = score + 1
+        }
+
+      }
+      if(x[i]>1400) {
+           x[i] = Math.random() * 600
+           y[i] = Math.random() * -600 - 100
+        }
+      if(y[i]>1000) {
+           y[i] = Math.random() * -600 - 100
+           x[i] = Math.random() * 600
+        }
+      if(x[i]<0) {
+           y[i] = Math.random() * -600 - 100
+           x[i] = Math.random() * 600
+          
+        }
+    }
+    ctx.font = "30px Arial"
+    ctx.fillText(score, 100, 100)
+    if (alive === false) {
+      mouseRadius = 0
+      ctx.fillText("You dead", 100, 200)
+      ctx.fillText(score + "points", 100, 300)
+    }
+  }
+  
+  function restart() {
+    if(alive===false){
+
+    }
+    score = 0
+    mouseRadius = 10
+    alive = true
+    x = []
+    y = []
+    radius = []
+    speedx = []
+    speedy = []
+    color = []
+    for (var i = 0; i < 200; i = i + 1) {
+      x.push(Math.random() * 1400)
+      y.push(Math.random() * - 600)
+      radius.push(Math.random() * 30)
+      speedx.push(Math.random() * 14 - 7)
+      speedy.push(Math.random() * 7)
+      color.push("hsl(" + Math.random() * 360 + ",100%,50%)")
+    }
+  }
+
+
+
+</script>

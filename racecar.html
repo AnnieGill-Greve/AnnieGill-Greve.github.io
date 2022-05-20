@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        img {
+            position: absolute;
+            height: 200px;
+        }
+
+        #chiaki2 {
+            top: 300px;
+        }
+
+        div {
+            top: 100px;
+            left: 100px;
+            position: absolute;
+            background-color: rgb(122, 36, 50);
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="timer">
+        <center>
+            Timer:0
+        </center>
+    </h1>
+    <img id="chiaki1" src="https://ih1.redbubble.net/image.1521165008.3144/flat,750x,075,f-pad,750x1000,f8f8f8.jpg ">
+    <img id="chiaki2" src="https://ih1.redbubble.net/image.1521165008.3144/flat,750x,075,f-pad,750x1000,f8f8f8.jpg">
+    <div id="win">chiaki</div>
+
+</html>
+
+<script>
+    var position2 = 0
+    var position = 0
+    var chiaki1 = document.getElementById("chiaki1")
+    var chiaki2 = document.getElementById("chiaki2")
+    var timer = 0
+    var finishDistance = 600
+    document.addEventListener("keydown", KeydownHandler)
+    document.getElementById("win").addEventListener("click",restart)
+    function restart() {
+        position = 0
+        chiaki1.style.left = position + "px"
+        position2 = 0
+        chiaki2.style.left = position2 + "px"
+    }
+
+    function KeydownHandler(e) {
+        if (e.key === "h") {
+            position = position + 20
+                chiaki1.style.left = position + "px"
+            if (position >= 600) {
+                document.getElementById("win").style.display = "block"
+            }
+        }
+
+
+        if (e.key === "e") {
+            position2 = position2 + 20
+            chiaki2.style.left = position2 + "px"
+            if (position2 >= 600) {
+            document.getElementById("win").style.display = "block"
+            }
+        }
+    }
+
+    setInterval(Timerr, 100)
+    function Timerr() {
+        timer = timer + 1
+        document.getElementById("timer").innerHTML = timer
+    }
+
+</script>

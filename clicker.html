@@ -2,19 +2,62 @@
 <html>
 
 <head>
+    <title> ur moms clicker ;) </title>
     <style>
         p {
-            color:rgb(127, 168, 255);
+            color: rgb(56, 101, 199);
         }
+
         body {
-            color:burlywood;
+            color: rgb(201, 121, 16);
         }
     </style>
 </head>
 
 <body>
     <p> bit </p>
+    <img id="img"
+        src="https://cdn.shopify.com/s/files/1/0344/8717/3164/products/Chiaki-Nanami-Slip-On-Sneakers-Custom-Anime-Danganronpa-Shoes-gearanime_650x.jpg?v=1630343004">
+    <div id="score"> test </div>
     more bit
+
+    <p id="upgrade"> !UPGRADE! </p>
+    <p id="cost"> Cost</p>
+    <p id="upgrade2"> Upgrade two! or.. something?</p>
 </body>
 
 </html>
+
+
+<script>
+    document.getElementById("img").addEventListener("click", imgClick)
+    document.getElementById("upgrade").addEventListener("click", upgradeClick)
+    document.getElementById("upgrade2").addEventListener("click", upgradeTwoOrSomething)
+    var score = 0
+    function imgClick() {
+        document.getElementById("score").innerText = score
+        score = score + 1
+    }
+
+    function upgradeClick() {
+         if (score >= 5) {
+            score = score - 5
+            setInterval(autoUpgrade,500)
+        }
+    }
+
+    function autoUpgrade() {
+        score = score + 1
+        document.getElementById("score").innerText = score
+
+    }
+
+    function upgradeTwoOrSomething(){
+        if (score >= 5) {
+            score = score - 10
+            setInterval(autoUpgrade,400)
+        }
+    }
+
+
+</script>
